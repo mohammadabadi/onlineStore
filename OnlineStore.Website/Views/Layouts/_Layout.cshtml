@@ -1,0 +1,405 @@
+﻿@{
+    var version = 4.7;
+
+    var emptyTitle = String.IsNullOrWhiteSpace(ViewBag.Title);
+    var title = (emptyTitle ? StaticValues.WebsiteTitle : ViewBag.Title);
+    var pageTitle = (emptyTitle ? title : title + " - " + StaticValues.WebsiteTitle);
+
+    var ogType = (string)ViewBag.OGType ?? "article";
+
+    var ogDescription = (string)ViewBag.Description ?? String.Empty;
+
+    var ogKeywords = (string)ViewBag.Keywords ?? String.Empty;
+
+    var ogImage = (string)ViewBag.OGImage ?? (StaticValues.WebsiteUrl + "/images/small-logo.jpg");
+
+    string googleMap = StaticContents.GetByName("GoogleMap").Content;
+
+    var absoluteUri = String.Empty;
+
+    if (!String.IsNullOrWhiteSpace(ViewBag.CanonicalUrl))
+    {
+        absoluteUri = StaticValues.WebsiteUrl + ViewBag.CanonicalUrl;
+    }
+    else
+    {
+        absoluteUri = StaticValues.WebsiteUrl + Request.Url.AbsolutePath;
+    }
+}
+<!DOCTYPE html>
+
+<html lang="fa-IR">
+<head>
+    <title>@title</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="msvalidate.01" content="FACC6DE2B0F4EE9AA86539D386B20032" />
+    <meta name="alexaVerifyID" content="65sGU9FV_wkdfKNBy0GLt-roAjk" />
+    <meta name="enamad" content="934904601" />
+    <meta name="samandehi" content="396656022" />
+
+    <meta name="description" content="@ogDescription" />
+    <meta name="keywords" content="@ogKeywords" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="copyright" content="@StaticValues.WebsiteTitle &copy; @DateTime.Now.Year" />
+
+    <link rel="publisher" href="https://plus.google.com/+OnlineStoreWebsite" />
+    <meta name="application-name" content="@StaticValues.WebsiteTitle" />
+
+    <meta property="og:title" content="@title" />
+    <meta property="og:type" content="@ogType" />
+    <meta property="og:image" content="@ogImage" />
+    <meta property="og:url" content="@absoluteUri" />
+    <meta property="og:description" content="@ogDescription" />
+    <meta property="og:site_name" content="@StaticValues.WebsiteTitle" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@title" />
+    <meta name="twitter:image" content="@ogImage" />
+    <meta name="twitter:description" content="@ogDescription" />
+
+    @if (ViewBag.NoIndex == true)
+    {
+        <meta name="robots" content="noindex,nofollow" />
+    }
+    else
+    {
+        <meta name="robots" content="index,follow" />
+    }
+
+    @if (ViewBag.HasPaging == true)
+    {
+        var originalUrl = StaticValues.WebsiteUrl + ViewBag.OriginalUrl;
+
+        var nextpage = (int?)ViewBag.Nextpage;
+        var prevpage = (int?)ViewBag.Prevpage;
+
+
+        if (prevpage.HasValue)
+        {
+            <link rel="prev" href="@(originalUrl + "/" + prevpage.Value)">
+        }
+
+        if (nextpage.HasValue)
+        {
+            <link rel="next" href="@(originalUrl + "/" + nextpage.Value)">
+        }
+    }
+
+    <link rel="canonical" href="@absoluteUri" />
+    <link rel="alternate" hreflang="fa" href="@absoluteUri" />
+
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+    @*
+        <link rel="manifest" href="/favicon/manifest.json">*@
+    <meta name="msapplication-TileColor" content="#ff3d00">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ff3d00">
+
+    <link href="/assets/font-awesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/owl-carousel-v2/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/assets/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="/assets/animate/animate.min.css" rel="stylesheet" />
+    <link href="/assets/raty/jquery.raty.css" rel="stylesheet" />
+
+    @* ToolTip *@
+    <link href="/assets/tooltipster-master/css/tooltipster.css" rel="stylesheet" />
+
+    <link href="/assets/owlCarousel2/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/assets/owlCarousel2/owl.theme.default.min.css" rel="stylesheet" />
+
+    <link href="/css/newStyle.css?ver=@version" rel="stylesheet" />
+    @*Bootstrap*@
+    <link href="/assets/bootstrap4/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="/css/template.css?ver=@version" rel="stylesheet" />
+
+    @RenderSection("Styles", false)
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <div class="responsive-box">
+                <div class="row">
+                    <div class="logo col-12 col-sm-12 col-md-3 col-lg-2  p-0"> <img src="~/images/logo.png" width="190" /></div>
+                    <div class="menu col-12 col-sm-12 col-md-9 col-lg-10 p-0">
+                        <ul>
+                            <li><a href="/">صفحه اصلی</a></li>
+                            <li><a href="/Shop">فروشگاه</a></li>
+                            <li><a href="/AboutUs">درباره ما</a></li>
+                            <li><a href="/ContactUs">تماس با ما</a></li>
+                            <div class="social-box">
+                                <i class="fa fa-phone fa-flip-horizontal" aria-hidden="true" style="margin:2px; 0 0 3px"></i>
+                                تلفن تماس : 23456789-051
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="main-box">
+            @RenderBody()
+        </div>
+        <footer class="footer-box">
+            <div class="responsive-box">
+                <div class="row">
+                    <div class="logo-footer col-12 col-sm-6 col-md-4">
+                        <img src="~/images/logo.png" width="250" />
+                        <p>@StaticValues.Address</p>
+                    </div>
+                    <div class="fastAccess col-12 col-sm-6 col-md-4">
+                        <h3>دسترسی سریع</h3>
+                        <ul>
+                            <li><a href="/Shop">فروشگاه</a></li>
+                            <li><a href="/AboutUs">درباره ما</a></li>
+                            <li><a href="/ContactUs">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                    <div class="namad col-12 col-sm-6 col-md-4">
+                        <h3>نمادها</h3>
+                        <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=231401&amp;Code=M91bvRGOs0xGdemyvrfh"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=231401&amp;Code=M91bvRGOs0xGdemyvrfh" alt="" style="cursor:pointer" id="M91bvRGOs0xGdemyvrfh"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyRight col-12">تمامی حقوق معنوی و مادی این سایت برای آن محفوظ می باشد.</div>
+        </footer>
+    </div>
+    <!--scripts-->
+    <script src="/assets/bootstrap4/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/assets/owlCarousel2/owl.carousel.min.js"></script>
+    @*Bootstrap*@
+    <script src="/assets/bootstrap4/bootstrap.bundle.min.js"></script>
+    <script src="/assets/toastr/toastr.min.js"></script>
+    <script src="/assets/tooltipster-master/js/jquery.tooltipster.min.js"></script>
+    <script src="/assets/underscore/underscore-min.js"></script>
+    <script src="/assets/raty/jquery.raty.min.js"></script>
+    <script src="/assets/jquery.validate/jquery.validate.min.js"></script>
+    <script src="/assets/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="/js/main.js"></script>
+    @* <script src="/js/main.min.js?ver=@version"></script>*@
+    <script src="/js/cart.min.js?ver=@version"></script>
+    <script src="/js/products.min.js?ver=@version"></script>
+    <script src="/js/simple-search.min.js?ver=@version"></script>
+    <script src="/js/newsletter-membership.min.js?ver=@version"></script>
+   
+    <script>
+    var isRial = @(ExtensionMethods.IsRial ? "true"  : "false");
+    var isAuthenticated = @(User.Identity.IsAuthenticated ? "true" : "false");
+    </script>
+   
+    @RenderSection("Scripts", false)
+   
+    <script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "Organization",
+    "name" : "@StaticValues.WebsiteTitle",
+    "alternateName" : "OnlineStore",
+    "url": "@StaticValues.WebsiteUrl",
+    "logo": "@(StaticValues.WebsiteUrl + "/images/template/logo.jpg")",
+    "contactPoint" : [{
+    "@@type" : "ContactPoint",
+    "telephone" : "+98-51-38407540",
+    "contactType" : "customer service",
+    "contactOption" : "TollFree",
+    "areaServed" : "IR",
+    "availableLanguage" : "Persian"
+    }],
+    "sameAs" : [
+   
+   
+    "https://plus.google.com/+OnlineStoreWebsite",
+    "https://www.youtube.com/c/OnlineStoreWebsite",
+    "https://twitter.com/OnlineStore",
+    "https://www.facebook.com/OnlineStore",
+    "https://instagram.com/OnlineStore",
+   
+    "http://www.aparat.com/OnlineStore",
+    "http://www.cloob.com/name/OnlineStore",
+    "http://facenama.com/OnlineStore",
+    "http://www.hammihan.com/profile/OnlineStore",
+    "http://OnlineStore.iteg.ir/"
+   
+    @*
+        "https://www.linkedin.com/company/OnlineStore",
+    *@
+   
+    ],
+    "potentialAction": {
+    "@@type": "SearchAction",
+    "target": "@(StaticValues.WebsiteUrl + "/Search?text={search_term_string}")",
+    "query-input": {
+    "@@type": "PropertyValueSpecification",
+    "valueRequired": true,
+    "valueMaxlength": 250,
+    "valueName": "search_term_string"
+    }
+    }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "WebSite",
+    "name": "الیاس سانیا",
+    "alternateName": "@StaticValues.WebsiteTitle",
+    "url": "@StaticValues.WebsiteUrl"
+    }
+    </script>
+   
+    @*<!--Start of Zopim Live Chat Script-->
+        <script type="text/javascript">
+            window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+            d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+            _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+                $.src="//v2.zopim.com/?43KtFWybVFTUQC0g5BYwtrz8Yga7hJk4";z.t=+new Date;$.
+                type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+        </script>
+        <!--End of Zopim Live Chat Script-->*@
+   
+   
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+   
+        ga('create', 'UA-74857354-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//pw.online-store.com/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            
+            $('.simple-carousel').owlCarousel({
+                loop: true,
+                center: true,
+                items: 5,
+                margin: 10,
+                autoplay: true,
+                dots: false,
+                nav: true,
+                autoplayTimeout: 8500,
+                smartSpeed: 450,
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                responsive: {
+                    0: {
+                        nav: false,
+                        items: 1
+                    },
+                    768: {
+                        nav: false,
+                        items: 2
+                    },
+                    900: {
+                        items: 3
+                    },
+                    1170: {
+                        items: 4
+                    },
+                    1400: {
+                        items: 4
+                    }
+                }
+            });
+            $('#customers-testimonials').owlCarousel({
+                loop: true,
+                center: true,
+                items: 3,
+                margin: 30,
+                autoplay: true,
+                dots: false,
+                nav: true,
+                autoplayTimeout: 8500,
+                smartSpeed: 450,
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                responsive: {
+                    0: {
+                        nav: false,
+                        items: 1
+                    },
+                    768: {
+                        nav: false,
+                        items: 2
+                    },
+                    1170: {
+                        items: 3
+                    }
+                }
+            });
+            $('#trophy-testimonials').owlCarousel({
+                loop: true,
+                center: true,
+                items: 5,
+                margin: 30,
+                autoplay: true,
+                dots: false,
+                nav: false,
+                autoplayTimeout: 8500,
+                smartSpeed: 450,
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                responsive: {
+                    0: {
+                        nav: false,
+                        items: 1
+                    },
+                    500: {
+                        nav: false,
+                        items: 2
+                    },
+                    768: {
+                        nav: true,
+                        items: 3
+                    },
+                    1170: {
+                        nav: true,
+                        items: 4
+                    },
+                    1280: {
+                        nav: true,
+                        items: 5
+                    }
+                }
+            });
+        });
+    </script>
+    <noscript><p><img src="//pw.online-store.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <a href="http://www.alexa.com/siteinfo/online-store.com" class="hide">
+        <script type="text/javascript" src="http://xslt.alexa.com/site_stats/js/s/a?url=online-store.com" async defer></script>
+    </a>
+</body>
+</html>

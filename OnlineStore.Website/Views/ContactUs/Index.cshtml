@@ -1,0 +1,119 @@
+﻿@model ContactUsInfo
+
+@{
+    var version = 1.2;
+
+    ViewBag.Title = "تماس با ما";
+}
+@{
+
+
+    var emptyTitle = String.IsNullOrWhiteSpace(ViewBag.Title);
+    var title = (emptyTitle ? StaticValues.WebsiteTitle : ViewBag.Title);
+    var pageTitle = (emptyTitle ? title : title + " - " + StaticValues.WebsiteTitle);
+
+    var ogType = (string)ViewBag.OGType ?? "article";
+
+    var ogDescription = (string)ViewBag.Description ?? String.Empty;
+
+    var ogKeywords = (string)ViewBag.Keywords ?? String.Empty;
+
+    var ogImage = (string)ViewBag.OGImage ?? (StaticValues.WebsiteUrl + "/images/small-logo.jpg");
+
+    string googleMap = StaticContents.GetByName("GoogleMap").Content;
+
+    var absoluteUri = String.Empty;
+
+    if (!String.IsNullOrWhiteSpace(ViewBag.CanonicalUrl))
+    {
+        absoluteUri = StaticValues.WebsiteUrl + ViewBag.CanonicalUrl;
+    }
+    else
+    {
+        absoluteUri = StaticValues.WebsiteUrl + Request.Url.AbsolutePath;
+    }
+}
+<!-- Form -->
+<section class="form-section">
+    <div class="responsive-box">
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="title-box text-center">
+                    <h5>
+                        <span class="title-bofore"></span> تماس با ما
+                        <div class="title-after"></div>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-box w-100">
+                <form id="SendMessage" class="validate ajax contact-form" action="/ContactUs/SendMessage" method="post" style="width:100%;direction:rtl;">
+                    <div class="row">
+                        <div class="col-12 my-1 text-right">
+                            <label class="text-right font-weight-bold" for="FullName">نام و نام خانوادگی</label>
+                            <input placeholder="لطفا نام و نام خانوادگی خود را وارد کنید" id="FullName" name="FullName" type="text" class="required" maxlength="100" />
+                        </div>
+                        <div class="col-12 my-1 text-right">
+                            <label for="Email" class="text-right font-weight-bold">عنوان پیام</label>
+                            <input placeholder="لطفا ایمیل خود را وارد کنید" id="Email" name="Email" type="text" class="required email" />
+                        </div>
+                        <div class="col-12 my-1 text-right">
+                            <label for="Subject" class="text-right font-weight-bold">عنوان پیام</label>
+                            <input id="Subject" name="Subject" type="text" class="required" maxlength="300" placeholder="لطفا عنوان پیام خود را وارد کنید" />
+                        </div>
+                        <div class="col-12 my-1 text-right">
+                            <label class="text-right font-weight-bold" for="Message">پیام</label>
+                            <textarea id="Message" name="Message" class="required" maxlength="1000" placeholder="لطفا متن پیام خود را وارد کنید"></textarea>
+                        </div>
+                        <div class="col-12 my-1">
+                            <button class="btn btn-success" type="submit">ارسال</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="message-box hide">
+                    @Html.Partial("_Success")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Form -->
+<!-- Social -->
+<section class="social-section">
+    <div class="responsive-box">
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="title-box text-center">
+                    <h5>
+                        <span class="title-bofore"></span> اطلاعات تماس
+                        <div class="title-after"></div>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="socialBox text-right">
+
+                    <div class="box-content">
+                        <div class="contact-info">
+                            <p class="my-2"><i style="margin:2px; 0 0 3px" class="fa fa-envelope"></i>ایمیل: @StaticValues.Email</p>
+                            <p class="my-2"><i style="margin:2px; 0 0 3px" class="fa fa-phone"></i>تلفن: @StaticValues.Phone</p>
+                            <p class="my-2"><i style="margin:2px; 0 0 3px" class="fa fa-map-marker"></i>آدرس: @StaticValues.Address</p>
+                            <p class="my-2"><i style="margin:2px; 0 0 3px" class="fa fa-home"></i>کد پستی: @StaticValues.PostalCode</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Social -->
+
+@section Styles{
+    <link href="~/css/contact-us.min.css?ver=@version" rel="stylesheet" />
+
+}
+
+@section Scripts{
+    <script src="/js/send-contact-message.min.js?ver=@version"></script>
+}
