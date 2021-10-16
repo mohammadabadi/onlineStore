@@ -141,23 +141,42 @@
         <header>
             <div class="responsive-box">
                 <div class="row">
-                    <div class="logo col-12 col-sm-12 col-md-3 col-lg-2  p-0"> <img src="~/images/logo.png" width="190" /></div>
-                    <div class="menu col-12 col-sm-12 col-md-9 col-lg-10 p-0">
-                        <ul>
-                            <li><a href="/">صفحه اصلی</a></li>
-                            <li><a href="/Shop">فروشگاه</a></li>
-                            <li><a href="/AboutUs">درباره ما</a></li>
-                            <li><a href="/ContactUs">تماس با ما</a></li>
-                            <div class="social-box">
-                                <i class="fa fa-phone fa-flip-horizontal" aria-hidden="true" style="margin:2px; 0 0 3px"></i>
-                                تلفن تماس : 23456789-051
-                            </div>
-                        </ul>
+                    <div class="logo col-11 col-sm-11 col-md-3 col-lg-2  p-0"> <img src="~/images/logo.png" width="190" /></div>
+                    <div class="menu col-1 col-sm-1 col-md-9 col-lg-10 p-0">
+                        <div class="menubar-main">
+                            <ul>
+                                <li><a href="/">صفحه اصلی</a></li>
+                                <li><a href="/Shop">فروشگاه</a></li>
+                                <li><a href="/AboutUs">درباره ما</a></li>
+                                <li><a href="/ContactUs">تماس با ما</a></li>
+                                <div class="social-box">
+                                    <i class="fa fa-phone fa-flip-horizontal" aria-hidden="true" style="margin:2px; 0 0 3px"></i>
+                                    تلفن تماس : 23456789-051
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="responsiveMenu">
+                            <span class="d-block d-sm-block d-md-none d-lg-none" onclick="openNav()"><i style="margin:0 0 0 10px" class="fa fa-bars" aria-hidden="true"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="my-4 text-center"><img src="~/images/logo.png" width="180" /></div>
+                <a href="/">صفحه اصلی</a>
+                <a href="/Shop">فروشگاه</a>
+                <a href="/AboutUs">درباره ما</a>
+                <a href="/ContactUs">تماس با ما</a>
+                <div class="social-box">
+                    <i class="fa fa-phone fa-flip-horizontal" aria-hidden="true" style="margin:2px; 0 0 3px"></i>
+                    تلفن تماس : 23456789-051
+                </div>
+            </div>
+
+            <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
         </header>
-        <div class="main-box">
+        <div id="main" class="main-box">
             @RenderBody()
         </div>
         <footer class="footer-box">
@@ -302,6 +321,19 @@
         })();
     </script>
     <script>
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginRight = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginRight = "0";
+            document.body.style.backgroundColor = "white";
+        }
         jQuery(document).ready(function ($) {
             "use strict";
             

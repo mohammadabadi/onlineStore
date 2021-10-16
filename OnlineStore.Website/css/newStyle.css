@@ -503,7 +503,7 @@ footer.footer-box .namad {
 }
 footer.footer-box .copyRight {
     text-align: center;
-    height: 50px;
+    min-height: 50px;
     color: #545454;
     font-size: 14px;
     line-height: 50px;
@@ -612,4 +612,80 @@ footer.footer-box .copyRight {
 }
 .responsive-box {
     border-radius:5px;
+}
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #f7f7f7; /*light gray*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    box-shadow: 0px 0px 9px 0px #c1c1c1;
+}
+    .sidenav .social-box {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 15px 8px 15px 32px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        text-align: center;
+        border-top: 1px solid #e3e3e3;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+@media screen and (max-width: 776px) {
+    .menubar-main {
+        display:none;
+    }
+}
+@media screen and (min-width: 777px) {
+    .responsiveMenu {
+        display: none;
+    }
+}
+.responsiveMenu {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 20px;
 }
