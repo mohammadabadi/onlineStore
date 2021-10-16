@@ -446,7 +446,7 @@ body {
     margin-right: 50px; }
 
 .alert, .alert-info, .alert-success, .alert-warning, .alert-error {
-  color: #fafbfb;
+  /*color: #fafbfb;*/
   text-align: center;
   width: 400px;
   padding: 5px 10px;
@@ -1079,7 +1079,7 @@ body {
     .main-header .account .content-box .content .profile {
       text-align: center;
       background-color: #ffc400;
-      height: 100px;
+      height: 120px;
       padding: 10px; }
       .main-header .account .content-box .content .profile.authenticated .profile-image i {
         color: #455a64; }

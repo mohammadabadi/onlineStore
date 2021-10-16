@@ -30,13 +30,130 @@
 
     var summary = ViewBag.Description;
 }
+<div class="contianer-fluid shopMenu">
+    <div class="row">
+        <div class="responsive-box main-header">
+            <div class="search-box">
+                @Html.Partial("/Views/Layouts/_SimpleSearch.cshtml")
 
+            </div>
+            <div class="float-left">
+                <div class="support">
+
+                    <a href="/Support">
+                        <i class="icon"><i class="fa fa-question-circle"></i></i>
+                        <div class="arrow">
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <p>
+                            راهنمای مشتریان
+                            @*<span>پاسخ سوالات شما</span>*@
+                        </p>
+                    </a>
+                    <div class="content-box">
+                        <div class="content">
+                            <p>راهنمای مشتریان:</p>
+                            <span>
+                                <a href="tel:+985138407540" target="_blank">051 35412680</a>
+                            </span>
+                            <p>تماس سریع در تلگرام:</p>
+                            <span>
+                                <a href="https://telegram.me/OnlineStore" target="_blank">@@behbudgostar</a>
+                            </span>
+                            <ul>
+                                <li>
+                                    <a href="/TrackOrder"><i class="fa fa-angle-left"></i>پیگیری سفارش</a>
+                                </li>
+                                <li>
+                                    <a href="/Payment-Methods"><i class="fa fa-angle-left"></i>شیوه های پرداخت</a>
+                                </li>
+                                <li>
+                                    <a href="/Shipping-Methods"><i class="fa fa-angle-left"></i>نحوه حمل و تحویل کالا</a>
+                                </li>
+                                <li>
+                                    <a href="/Shipping-Cost"><i class="fa fa-angle-left"></i>نحوه محاسبه هزینه ی ارسال</a>
+                                </li>
+                                <li>
+                                    <a href="/Guarantee-Of-Origin"><i class="fa fa-angle-left"></i>ضمانت تطابق کالا با سایت</a>
+                                </li>
+                                <li>
+                                    <a href="/Return-Product"><i class="fa fa-angle-left"></i>امکان بازگرداندن کالا تا 10 روز</a>
+                                </li>
+                                <li>
+                                    <a href="/Privacy-Policy"><i class="fa fa-angle-left"></i>سیاست حفظ حریم خصوصی</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="account">
+                    <a href="/Login?ReturnUrl=@HttpUtility.UrlEncode(Request.RawUrl)">
+                        <i class="icon"><i class="fa fa-user"></i></i>
+                        <div class="arrow">
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <p>
+                            حساب کاربری
+                            @*<span>ورود و ثبت نام</span>*@
+                        </p>
+                    </a>
+                    <div class="content-box">
+                        <div class="content">
+                            <div class="profile@(User.Identity.IsAuthenticated ? " authenticated" : String.Empty)">
+                                <div class="profile-image">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <a class="btn-login" href="/Login?ReturnUrl=@HttpUtility.UrlEncode(Request.RawUrl)">ورود</a>
+                                    <p>
+                                        کاربر جدید هستید؟
+                                        <a href="/Register">ثبت نام</a>
+                                    </p>
+                                }
+                                else
+                                {
+                                    var user = OSUsers.GetByID(User.Identity.GetUserId());
+                                    <p>
+                                        @(user.Firstname + " " + user.Lastname)
+                                    </p>
+                                    <a class="btn-logout" href="/My-Account/My-Profile">پروفایل کاربر</a>
+                                }
+                            </div>
+                            <div class="user-pages">
+                                <p>
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <span>میهمان عزیز</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@(User.Identity.GetUserName()) عزیز</span>
+                                    }
+                                    ، خوش آمدید.
+                                </p>
+                                <ul>
+                                    @*<li><a href="/My-Account/My-Profile"><i class="fa fa-angle-left"></i>پروفایل کاربر</a></li>*@
+                                    <li><a href="/My-Account/My-Wishes"><i class="fa fa-angle-left"></i>آرزوهای من</a></li>
+                                    <li><a href="/My-Account/My-Orders"><i class="fa fa-angle-left"></i>سفارشات</a></li>
+                                    <li><a href="/TrackOrder"><i class="fa fa-angle-left"></i>پیگیری سفارش</a></li>
+                                    <li><a href="/Logout"><i class="fa fa-angle-left"></i>خروج</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("_MiniCart")
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
 @Html.Partial("_PageTitle", new PageTitleSettings()
 {
     ShowTitle = false,
     BreadCrumbs = Model.BreadCrumbLinks
 })
-
 <div class="responsive-box">
     <div class="content-column">
         <div class="product-details-box">

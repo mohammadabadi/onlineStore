@@ -1,6 +1,29 @@
-﻿@model string
+﻿@model HomeSettings
+
 @{
-    ViewBag.Title = "فروشگاه";
+    var version = 2.6;
+
+    #region Banners
+
+    var banners = Model.Banners;
+
+    var bnr1 = banners.Where(item => item.BannerType == "HomeBnr1").FirstOrDefault();
+    var bnr2 = banners.Where(item => item.BannerType == "HomeBnr2").FirstOrDefault();
+    var bnr4 = banners.Where(item => item.BannerType == "HomeBnr4").FirstOrDefault();
+    var bnr5 = banners.Where(item => item.BannerType == "HomeBnr5").FirstOrDefault();
+    var bnr6 = banners.Where(item => item.BannerType == "HomeBnr6").FirstOrDefault();
+    var bnr7 = banners.Where(item => item.BannerType == "HomeBnr7").FirstOrDefault();
+    var bnr8 = banners.Where(item => item.BannerType == "HomeBnr8").FirstOrDefault();
+    var bnr9 = banners.Where(item => item.BannerType == "HomeBnr9").FirstOrDefault();
+    var bnr10 = banners.Where(item => item.BannerType == "HomeBnr10").FirstOrDefault();
+    var bnr11 = banners.Where(item => item.BannerType == "HomeBnr11").FirstOrDefault();
+    var bnr12 = banners.Where(item => item.BannerType == "HomeBnr12").FirstOrDefault();
+
+    var othersBanners = banners.Where(item => item.BannerType == "HomeOthers").ToList();
+
+    int bannerOrder = 0;
+
+    #endregion Banners
 }
 
 <div class="contianer-fluid shopMenu">

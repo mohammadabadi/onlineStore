@@ -18,32 +18,34 @@
         </div>
         <div style="text-align: center; border: 1px solid #ccc">
 
-            @if(Model.ResCode == 0)
+            @if (System.Convert.ToInt32(Model.ResCode) == 0)
             {
-                <div style="background:#5cd17f;padding:10px 0;text-align:center">
-                    <p style="padding:5px 0; font-weight:bold;color:#249747">پرداخت موفقیت آمیز بود</p>
+                <div style="background:#c1e9cd;padding:10px 0;text-align:center">
+                    <p style="padding:5px 0; font-weight:bold;color:#249747">مرحله اول سفارش موفقیت آمیز بود، لطفا جهت ثبت و تکمیل فرآیند بر روی دکمه تکمیل فرآیند خرید کلیک کنید.</p>
                 </div>
             }
-            @if(Model.ResCode !== 0)
+            @if (System.Convert.ToInt32(Model.ResCode) != 0)
             {
-                <div style="background:#c95050;padding:10px 0;text-align:center">
+                <div style="background:#ffbebe;padding:10px 0;text-align:center">
                     <p style="padding:5px 0; font-weight:bold;color:#d13c3c">پرداخت شما با مشکل مواجه شده است ، در صورت برداشت وجه ،حداکثر ظرف مدت 48 ساعت به حساب شما باز خواهد گشت.</p>
                 </div>
             }
-            <div style="margin-top: 20px"></div>
-            <div style="margin-top: 20px; margin-bottom: 20px">
-                کد پاسخ
-            </div>
-            <div style="margin-top: 20px; margin-bottom: 20px">
-                @Model.ResCode
-                @Html.HiddenFor(t => t.ResCode)
-            </div>
-            <div style="margin-top: 20px; margin-bottom: 20px">
-                کلید توکن
-            </div>
-            <div style="margin-top: 20px; margin-bottom: 20px">
-                @Model.Token
-                @Html.HiddenFor(t => t.Token)
+            <div style="display:none;visibility:hidden">
+                <div style="margin-top: 20px"></div>
+                <div style="margin-top: 20px; margin-bottom: 20px">
+                    کد پاسخ
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 20px">
+                    @Model.ResCode
+                    @Html.HiddenFor(t => t.ResCode)
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 20px">
+                    کلید توکن
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 20px">
+                    @Model.Token
+                    @Html.HiddenFor(t => t.Token)
+                </div>
             </div>
             <div style="margin-top: 20px; margin-bottom: 20px">
                 شماره سفارش
@@ -52,63 +54,73 @@
                 @Model.OrderId
                 @Html.HiddenFor(t => t.OrderId)
             </div>
-
-            <div id="traceno" style="margin-top: 20px; margin-bottom: 20px">
-                <button type="submit">تکمیل فرآیند خرید</button>
-            </div>
+            @if (System.Convert.ToInt32(Model.ResCode) == 0)
+            {
+                <div id="traceno" style="margin-top: 20px; margin-bottom: 20px">
+                    <button type="submit" style=" padding: 10px 20px; border-radius: 5px; border: 2px solid transparent; background: #4a9d28; color: #fff;">تکمیل فرآیند خرید</button>
+                </div>
+            }
         </div>
     </div>
+
+}
+
+@if (Model.VerifyResultData != null)
+{
+<div class="responsive-box" style="border-radius:5px;background:#ffffff;padding:5px 10px 10px;margin:10px auto;">
+    <div style="font-size: 20px; text-align: center; margin-top: 20px; margin-bottom: 20px">
+        مرحله نهایی خرید
+    </div>
+    <div style="text-align: center; border: 1px solid #ccc">
+
+        <div style="display:none;visibility:hidden">
+            <div style="margin-top: 20px"></div>
+            <div style="margin-top: 20px; margin-bottom: 20px">
+                کد پاسخ
+            </div>
+            <div style="margin-top: 20px; margin-bottom: 20px">
+                @Model.VerifyResultData.ResCode
+            </div>
+            <div style="margin-top: 20px; margin-bottom: 20px">
+                مبلغ
+            </div>
+            <div style="margin-top: 20px; margin-bottom: 20px">
+                @Model.VerifyResultData.Amount
+            </div>
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            شماره سفارش
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            @Model.VerifyResultData.OrderId
+        </div>
+
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            شماره مرجع
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            @Model.VerifyResultData.RetrivalRefNo
+        </div>
+
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            شماره پیگیری
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            @Model.VerifyResultData.SystemTraceNo
+        </div>
+
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            توضیحات
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px">
+            @Model.VerifyResultData.Description
+        </div>
+        <div style="margin-top: 30px; margin-bottom: 30px">
+            <a href="/Shop" style=" padding: 10px 20px; border-radius: 5px; border: 2px solid transparent; background: #44a9ff; color: #fff;">بازگشت به فروشگاه</a>
+        </div>
+    </div>
+</div>
         
-        }
-
-        @if (Model.VerifyResultData != null)
-        {
-            <div style="font-size: 20px; text-align: center; margin-top: 20px; margin-bottom: 20px">
-                اطلاعات دریافتی متد Verify
-            </div>
-            <div style="text-align: center; border: 1px solid #ccc">
-
-                <div style="margin-top: 20px"></div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    کد پاسخ
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.ResCode
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    مبلغ
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.Amount
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    شماره سفارش
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.OrderId
-                </div>
-
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    شماره مرجع
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.RetrivalRefNo
-                </div>
-
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    شماره پیگیری
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.SystemTraceNo
-                </div>
-
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    توضیحات
-                </div>
-                <div style="margin-top: 20px; margin-bottom: 20px">
-                    @Model.VerifyResultData.Description
-                </div>
-            </div>
         }
 
 
