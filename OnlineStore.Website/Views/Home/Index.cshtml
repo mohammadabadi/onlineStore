@@ -67,8 +67,7 @@
 <!-- End of Description -->
 <!-- Customers -->
 <section class="box-content">
-    @Html.Partial("_LatestProducts", Model.LatestProducts)
-    @Html.Partial("/Areas/Blog/Views/Shared/_LatestPosts.cshtml", Model.LatestNews)
+    @Html.Partial("_HomeLastProducts", Model.LatestProducts)
 </section>
 <!-- End of Customers -->
 <!-- ShortLink -->
@@ -109,84 +108,4 @@
     </div>
 </section>
 <!-- End of ShortLink -->
-<!-- Trophy -->
-<section class="trophy-section">
-    <div class="container">
-        <div class="row my-4">
-            <div class="col-12">
-                <div class="title-box text-center">
-                    <h5>
-                        <span class="title-bofore"></span> مدارک و جوایز
-                        <div class="title-after"></div>
-                    </h5>
-                </div>
-            </div>
-            <div class="col-12">
-                <!-- TESTIMONIALS -->
-                <section class="testimonials">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div id="trophy-testimonials" class="owl-carousel">
-
-                                    <!--TESTIMONIAL 1 -->
-                                    <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-responsive" src="https://image.freepik.com/free-photo/spaghetti-with-carbonara-sauce_1216-324.jpg" alt="">
-                                            <div class="item-details">
-                                                <h5>مدارک تست یک</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--END OF TESTIMONIAL 1 -->
-                                    <!--TESTIMONIAL 2 -->
-                                    <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-responsive" src="https://image.freepik.com/free-photo/dishes-with-healthy-waffles_1220-367.jpg" alt="">
-                                            <div class="item-details">
-                                                <h5>مدارک تست یک</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--END OF TESTIMONIAL 2 -->
-                                    <!--TESTIMONIAL 3 -->
-                                    <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-responsive" src="https://image.freepik.com/free-photo/top-view-of-tasty-noodles-with-prawns_1203-1769.jpg" alt="">
-                                            <div class="item-details">
-                                                <h5>مدارک تست یک</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--END OF TESTIMONIAL 3 -->
-                                    <!--TESTIMONIAL 4 -->
-                                    <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-responsive" src="https://image.freepik.com/free-photo/burguer-with-garnish_1088-72.jpg" alt="">
-                                            <div class="item-details">
-                                                <h5>مدارک تست یک</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--END OF TESTIMONIAL 4 -->
-                                    <!--TESTIMONIAL 5 -->
-                                    <div class="item">
-                                        <div class="shadow-effect">
-                                            <img class="img-responsive" src="https://image.freepik.com/free-photo/delicious-pastry-with-chicken_1203-1616.jpg" alt="">
-                                            <div class="item-details">
-                                                <h5>مدارک تست یک</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--END OF TESTIMONIAL 5 -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- END OF TESTIMONIALS -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End of Trophy -->
+@Html.Partial("/Areas/Blog/Views/Shared/_HomeLastPost.cshtml", Model.LatestNews)

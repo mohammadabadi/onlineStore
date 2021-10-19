@@ -91,7 +91,7 @@ namespace OnlineStore.Providers
         public static Size ThumbnailPostImageSize = new Size(215, 135);
         public static Size DefaultPostImageSize = new Size(280, 180);
         public static Size DetailPostImageSize = new Size(880, 495);
-        public static Size LatestNewsImageSize = new Size(175, 160);
+        public static Size LatestNewsImageSize = new Size(248, 226);
 
         #endregion Blog
 

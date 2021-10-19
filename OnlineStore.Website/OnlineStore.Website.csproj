@@ -369,6 +369,7 @@
       <DependentUpon>product-prices.css</DependentUpon>
     </Content>
     <Content Include="css\admin\product-prices.scss" />
+    <Content Include="Areas\Blog\Views\Shared\_HomeLastPost.cshtml" />
     <None Include="css\scss\blog-details.scss" />
     <Compile Include="Areas\User\Controllers\PartnerOrdersController.cs" />
     <Compile Include="Controllers\SpecialOffersController.cs" />
@@ -1994,6 +1995,7 @@
     <Content Include="Views\Packages\List.cshtml" />
     <Content Include="Views\Cart\VerifyPayment.cshtml" />
     <Content Include="Views\Layouts\_Layout.cshtml" />
+    <Content Include="Views\Shared\_HomeLastProducts.cshtml" />
     <None Include="Views\Shared\_Success.cshtml" />
     <Compile Include="Areas\Admin\Controllers\OSUsersController.cs" />
     <Compile Include="Areas\Blog\BlogAreaRegistration.cs" />

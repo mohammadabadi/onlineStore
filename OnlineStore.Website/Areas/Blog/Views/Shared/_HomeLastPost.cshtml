@@ -1,0 +1,61 @@
+﻿@model List<RecentPost>
+<!-- Trophy -->
+<section class="trophy-section">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="title-box text-center">
+                    <h5>
+                        <span class="title-bofore"></span> آخرین مقالات
+                        <div class="title-after"></div>
+                    </h5>
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- TESTIMONIALS -->
+                <section class="testimonials">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="HomeLastPost" class="owl-carousel">
+                                    @foreach (var item in Model)
+                                    {
+                                        try
+                                        {
+                                            var group = Groups.GetByID(item.GroupID);
+                                            var url = UrlProvider.GetPostUrl(item.ID, item.Title, group.TitleEn);
+
+                                            <!--TESTIMONIAL 1 -->
+                                            <div class="item-blog">
+                                                <div class="shadow-effect">
+                                                    <img class="img-responsive" src="@UrlProvider.GetPostImage(item.Image,StaticValues.LatestNewsImageSize)" title="@item.Title" alt="@item.Title">
+                                                    <div class="item-details-blog">
+                                                        <h5>@item.Title</h5>
+                                                        <span class="date">@Utilities.ToPersianDateString(item.LastUpdate)</span>
+                                                        <p>@item.Summary</p>
+                                                        <a class="more-btn-blog" href="@url"> <i style="margin-right:7px" class="fa fa-angle-left"></i>ادامه مطلب</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--END OF TESTIMONIAL 1 -->
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END OF TESTIMONIALS -->
+            </div>
+            @*<div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <a class="moreBlog" href="/RSS/LatestPosts">آخرین مقالات</a>    
+                </div>
+            </div>*@
+        </div>
+    </div>
+</section>
+<!-- End of Trophy -->

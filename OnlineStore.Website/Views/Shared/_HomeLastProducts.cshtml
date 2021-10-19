@@ -1,0 +1,64 @@
+﻿@model List<ProductItem>
+
+@{
+    // تعداد محصول در هر ستون
+    int columnSize = 20;
+    int i = 1;
+    @*int columnCount = (int)Math.Ceiling((float)Model.Count / (float)columnSize);*@
+}                         
+
+<section class="customer-section">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="title-box text-center">
+                    <h5>
+                        <span class="title-bofore"></span> آخرین محصولات
+                        <div class="title-after"></div>
+                    </h5>
+                </div>
+            </div>
+            <div class="col-12">
+                <!-- TESTIMONIALS -->
+                <section class="testimonials">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="customers-testimonials" class="owl-carousel">
+                                    @for (int j = columnSize * (i - 1); j <= (columnSize * i) - 1 && (j + 1) <= Model.Count; j++)
+                                    {
+                                        i = i++;
+                                        var group = Groups.GetByID(Model[j].GroupID.Value);
+                                        var url = UrlProvider.GetProductUrl(Model[j].ID, group.UrlPerfix, Model[j].UrlPerfix);
+                                        var dTitle = Model[j].DisplayTitle;
+
+                                        JsonProductVarient minPrice = null;
+                                        if (Model[j].HasVarients && Model[j].Prices != null && Model[j].Prices.Count > 0)
+                                        {
+                                            minPrice = (JsonProductVarient)Model[j].Prices.OrderBy(p => p.Price).First();
+                                        }
+
+                                        <!--TESTIMONIAL 1 -->
+                                        <div class="item">
+                                            <div class="shadow-effect">
+                                                <a href="@url">
+                                                    <img class="img-responsive" src="@Model[j].ImageFile" alt="@dTitle">
+                                                    <div class="item-details">
+                                                        <h5>@dTitle</h5>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--END OF TESTIMONIAL 1 -->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END OF TESTIMONIALS -->
+            </div>
+        </div>
+    </div>
+</section>
